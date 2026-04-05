@@ -6,6 +6,15 @@
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
+1. **Add and exclude a pet** - the user can create a pet profile with a name, species and age. When it is needed the user can include one more pet's profile or delete it. This is handled by the 'Pet' class, which stores pet attributes and belong to a 'User'.
+2. **Schedule daily nutritions**- The user can schdule the nutrition intake for a specific pet at a chosen time everyday. This is managed by the 'Food' class, which holds schedule and nutrition details and a link to a 'User' to a 'Pet'.
+3. **Schedule a Walk** — The user can schedule a walk for a specific pet at a chosen date and time. This is managed by the `Walk` class, which holds scheduling details and links a `User` to a `Pet`.
+
+Classes include:
+- 'User' -stores user credentials and owns a list of pets
+- 'Pet' - holds pet profile data
+- 'Food' - represents schedule nutritions data, and time
+- 'Walk' - represents a scheduled walk with date, time, and duration
 
 **b. Design changes**
 
