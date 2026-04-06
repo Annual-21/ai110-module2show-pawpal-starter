@@ -205,7 +205,11 @@ class Scheduler:
         """Sort all tasks by time using a unified sort key. Cached for performance."""
         if self._cached_schedule is None:
             all_tasks = self.pet.food_schedule + self.pet.walks
-            sort_key = lambda task: getattr(task, 'schedule_time', task.start_time)
+            def sort_key(task):
+                if hasattr(task, 'schedule_time'):
+                    return task.schedule_time   # Food
+                return task.start_time          # Walk
+
             self._cached_schedule = [task.summary() for task in sorted(all_tasks, key=sort_key)]
         return self._cached_schedule
 

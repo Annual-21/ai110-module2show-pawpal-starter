@@ -35,6 +35,24 @@ pip install -r requirements.txt
 ### Smart Scheduling
 Smart scheduling means planning pet care in a way that balances priority, timing, and owner availability so every important task gets done without overwhelming the day. In a pet care app, that looks like automatically ordering meals, walks, and meds by urgency and time window, avoiding conflicts, and filling only the minutes the owner has available. It also means using preferences—like morning walks or quiet evening feedings—so the schedule feels natural, and explaining why each task was placed where it was. The result is a reliable daily plan that helps busy owners keep pets happy and healthy with less guesswork.
 
+## Testing PawPal+
+
+### Run the tests
+```bash
+python -m pytest -v
+```
+
+### What the tests cover
+- **Sorting correctness** — tasks added out of order return in chronological order
+- **Recurrence logic** — daily/weekly walks auto-create the next occurrence on completion
+- **Conflict detection** — duplicate times trigger warnings (walk vs walk, food vs walk)
+- **Completion filtering** — completed and incomplete walks are correctly separated
+- **Edge cases** — empty pet schedule, non-recurring tasks, unique time slots
+
+### Confidence Level
+(4/5) — Core scheduling logic is well covered. 
+Would increase to 5/5 with additional tests for multi-pet systems and Streamlit UI interactions.
+
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.
