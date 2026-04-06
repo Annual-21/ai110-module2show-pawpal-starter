@@ -1,4 +1,9 @@
 import streamlit as st
+import datetime
+from datetime import date, time
+from dataclasses import dataclass, field
+from typing import List, Optional
+from pawpal_system import User, Pet, Food, Walk, PawPalSystem, Scheduler
 
 st.set_page_config(page_title="PawPal+", page_icon="🐾", layout="centered")
 
@@ -43,6 +48,14 @@ owner_name = st.text_input("Owner name", value="Jordan")
 pet_name = st.text_input("Pet name", value="Mochi")
 species = st.selectbox("Species", ["dog", "cat", "other"])
 
+if "owner" not in st.session_state:
+    st.session_state.owner = User(username=owner_name, email="")
+
+if "pet" not in st.session_state:
+    pet = Pet(name=pet_name, age=0, breed=species)
+    st.session_state.owner.add_pet(pet)
+    st.session_state.pet = pet
+
 st.markdown("### Tasks")
 st.caption("Add a few tasks. In your final version, these should feed into your scheduler.")
 
@@ -58,9 +71,17 @@ with col3:
     priority = st.selectbox("Priority", ["low", "medium", "high"], index=2)
 
 if st.button("Add task"):
+    walk = Walk(
+        date=date.today(),
+        start_time=time(8, 0),
+        duration_minutes=int(duration),
+        title=task_title,
+    )
+    st.session_state.pet.add_walk(walk)
     st.session_state.tasks.append(
         {"title": task_title, "duration_minutes": int(duration), "priority": priority}
     )
+    st.success(f"Added '{task_title}' to {st.session_state.pet.name}'s schedule!")
 
 if st.session_state.tasks:
     st.write("Current tasks:")
@@ -74,15 +95,12 @@ st.subheader("Build Schedule")
 st.caption("This button should call your scheduling logic once you implement it.")
 
 if st.button("Generate schedule"):
-    st.warning(
-        "Not implemented yet. Next step: create your scheduling logic (classes/functions) and call it here."
-    )
-    st.markdown(
-        """
-Suggested approach:
-1. Design your UML (draft).
-2. Create class stubs (no logic).
-3. Implement scheduling behavior.
-4. Connect your scheduler here and display results.
-"""
-    )
+    pet = st.session_state.get("pet", None)
+    if pet and pet.walks:
+        scheduler = Scheduler(pet)
+        schedule = scheduler.sort_by_time()
+        st.success(f"Schedule for {pet.name}:")
+        for item in schedule:
+            st.markdown(f"- {item}")
+    else:
+        st.info("No walks scheduled yet.")

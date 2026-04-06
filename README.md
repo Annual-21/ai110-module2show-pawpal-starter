@@ -32,6 +32,9 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### Smart Scheduling
+Smart scheduling means planning pet care in a way that balances priority, timing, and owner availability so every important task gets done without overwhelming the day. In a pet care app, that looks like automatically ordering meals, walks, and meds by urgency and time window, avoiding conflicts, and filling only the minutes the owner has available. It also means using preferences—like morning walks or quiet evening feedings—so the schedule feels natural, and explaining why each task was placed where it was. The result is a reliable daily plan that helps busy owners keep pets happy and healthy with less guesswork.
+
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.

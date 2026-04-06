@@ -20,7 +20,7 @@ Classes include:
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
-
+Yes, it changed because when the Copilot created the skeleton code it did not include any logic relations with the User. But again after telling the Copilot to review the skeleton code, it has fixed it. 
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
@@ -34,7 +34,7 @@ Classes include:
 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
-
+It reduced time complexcity for conflict detection function. This tradeoff was reasonable because it reduced time complexity to O(n) from O(n^2)
 ---
 
 ## 3. AI Collaboration
